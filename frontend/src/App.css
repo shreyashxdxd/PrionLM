@@ -1,0 +1,762 @@
+.hero {
+  position: relative;
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+
+  background:
+    radial-gradient(
+      ellipse at 18% 50%,
+      rgba(26, 140, 255, 0.13) 0%,
+      rgba(26, 140, 255, 0.045) 25%,
+      transparent 52%
+    ),
+    radial-gradient(
+      ellipse at 70% 35%,
+      rgba(255, 255, 255, 0.025) 0%,
+      transparent 45%
+    ),
+    linear-gradient(
+      115deg,
+      #030405 0%,
+      #090b0e 32%,
+      #050607 62%,
+      #000000 100%
+    );
+}
+
+
+/* --------------------------------------------------
+   ATMOSPHERIC BLUE GLOW
+-------------------------------------------------- */
+
+.hero-atmosphere {
+  position: absolute;
+  inset: 0;
+
+  background:
+    linear-gradient(
+      115deg,
+      rgba(26, 140, 255, 0.08) 0%,
+      transparent 28%
+    );
+
+  pointer-events: none;
+}
+
+
+/* --------------------------------------------------
+   DNA
+-------------------------------------------------- */
+
+.dna-background {
+  position: absolute;
+
+  top: -15%;
+  left: -18%;
+
+  width: 62%;
+  height: 135%;
+
+  transform: rotate(18deg);
+
+  opacity: 0.72;
+
+  pointer-events: none;
+
+  filter:
+    drop-shadow(0 0 25px rgba(26, 140, 255, 0.08));
+}
+
+
+/* --------------------------------------------------
+   HERO CONTENT
+-------------------------------------------------- */
+
+.hero-content {
+  position: relative;
+
+  z-index: 2;
+
+  width: 100%;
+  height: 100%;
+
+  display: flex;
+  flex-direction: column;
+
+  align-items: center;
+
+  padding-top: 17vh;
+
+  pointer-events: none;
+}
+
+
+/* --------------------------------------------------
+   BRAND
+-------------------------------------------------- */
+
+.brand {
+  font-family:
+    Inter,
+    "Segoe UI",
+    sans-serif;
+
+  font-size: clamp(
+    4rem,
+    7vw,
+    7.5rem
+  );
+
+  font-weight: 700;
+
+  letter-spacing: -0.065em;
+
+  line-height: 0.95;
+
+  user-select: none;
+}
+
+.brand-prion {
+  color: #ffffff;
+}
+
+.brand-lm {
+  color: #1a8cff;
+
+  text-shadow:
+    0 0 35px rgba(26, 140, 255, 0.2);
+}
+
+
+/* --------------------------------------------------
+   TAGLINE
+-------------------------------------------------- */
+
+.tagline {
+  margin-top: 28px;
+
+  max-width: 620px;
+
+  color: rgba(255, 255, 255, 0.62);
+
+  font-family:
+    Inter,
+    "Segoe UI",
+    sans-serif;
+
+  font-size: clamp(
+    0.9rem,
+    1.15vw,
+    1.1rem
+  );
+
+  font-weight: 400;
+
+  letter-spacing: 0.08em;
+
+  text-align: center;
+
+  line-height: 1.7;
+
+  text-transform: uppercase;
+}
+
+
+/* --------------------------------------------------
+   TRY BUTTON
+-------------------------------------------------- */
+
+.try-button {
+  pointer-events: auto;
+
+  margin-top: 68px;
+
+  display: flex;
+  align-items: center;
+  gap: 20px;
+
+  padding: 16px 25px;
+
+  border: 1px solid rgba(255, 255, 255, 0.16);
+
+  border-radius: 3px;
+
+  background:
+    linear-gradient(
+      135deg,
+      rgba(255, 255, 255, 0.055),
+      rgba(255, 255, 255, 0.015)
+    );
+
+  color: #ffffff;
+
+  font-family:
+    Inter,
+    "Segoe UI",
+    sans-serif;
+
+  font-size: 0.95rem;
+
+  font-weight: 500;
+
+  letter-spacing: 0.02em;
+
+  cursor: pointer;
+
+  backdrop-filter: blur(10px);
+
+  transition:
+    transform 0.3s ease,
+    border-color 0.3s ease,
+    background 0.3s ease,
+    box-shadow 0.3s ease;
+}
+
+.arrow {
+  color: #1a8cff;
+
+  font-size: 1.15rem;
+
+  transition:
+    transform 0.3s ease;
+}
+
+.try-button:hover {
+  transform: translateY(-3px);
+
+  border-color:
+    rgba(26, 140, 255, 0.55);
+
+  background:
+    linear-gradient(
+      135deg,
+      rgba(26, 140, 255, 0.12),
+      rgba(255, 255, 255, 0.025)
+    );
+
+  box-shadow:
+    0 12px 40px rgba(26, 140, 255, 0.12);
+}
+
+.try-button:hover .arrow {
+  transform: translateX(5px);
+}
+
+
+/* --------------------------------------------------
+   RESPONSIVE
+-------------------------------------------------- */
+
+@media (max-width: 900px) {
+
+  .dna-background {
+    left: -35%;
+    width: 85%;
+    opacity: 0.32;
+  }
+
+  .hero-content {
+    padding-top: 20vh;
+  }
+
+  .tagline {
+    max-width: 480px;
+  }
+}
+
+
+@media (max-width: 600px) {
+
+  .dna-background {
+    left: -55%;
+    width: 120%;
+    opacity: 0.25;
+  }
+
+  .hero-content {
+    padding: 18vh 24px 0;
+  }
+
+  .brand {
+    font-size: 4rem;
+  }
+
+  .tagline {
+    font-size: 0.75rem;
+    letter-spacing: 0.06em;
+  }
+
+  .try-button {
+    margin-top: 50px;
+  }
+}
+
+/* ==================================================
+   SHARED APP HEADER
+================================================== */
+
+.app-header {
+  position: absolute;
+  top: 0;
+  left: 0;
+
+  width: 100%;
+
+  padding: 28px 42px;
+
+  z-index: 10;
+}
+
+.mini-logo {
+  display: inline-block;
+
+  color: #ffffff;
+
+  font-size: 1.45rem;
+  font-weight: 700;
+
+  letter-spacing: -0.04em;
+}
+
+.mini-logo span {
+  color: #168cff;
+
+  text-shadow:
+    0 0 18px rgba(22, 140, 255, 0.35);
+}
+
+
+/* ==================================================
+   QUERY PAGE
+================================================== */
+
+.query-page {
+  position: relative;
+
+  width: 100vw;
+  height: 100vh;
+
+  overflow: hidden;
+
+  background:
+    radial-gradient(
+      ellipse at 20% 50%,
+      rgba(22, 140, 255, 0.13),
+      transparent 42%
+    ),
+    linear-gradient(
+      115deg,
+      #030405,
+      #090b0e 45%,
+      #000000
+    );
+}
+
+
+/* DNA */
+
+.query-dna {
+  position: absolute;
+
+  top: -15%;
+  left: -18%;
+
+  width: 62%;
+  height: 135%;
+
+  transform: rotate(18deg);
+
+  opacity: 0.38;
+
+  pointer-events: none;
+}
+
+
+/* Content */
+
+.query-content {
+  position: relative;
+
+  z-index: 3;
+
+  width: 100%;
+  height: 100%;
+
+  display: flex;
+  flex-direction: column;
+
+  align-items: center;
+  justify-content: center;
+
+  padding-bottom: 5vh;
+}
+
+
+/* Label */
+
+.query-label {
+  margin: 0 0 25px;
+
+  color: rgba(255, 255, 255, 0.55);
+
+  font-size: 0.85rem;
+
+  letter-spacing: 0.12em;
+
+  text-transform: uppercase;
+}
+
+
+/* Prompt */
+
+.prompt-wrapper {
+  width: min(760px, 75vw);
+
+  position: relative;
+}
+
+.prompt-wrapper input {
+  width: 100%;
+
+  padding: 20px 8px;
+
+  border: none;
+  outline: none;
+
+  background: transparent;
+
+  color: #ffffff;
+
+  font-family: inherit;
+
+  font-size: clamp(
+    1.1rem,
+    1.7vw,
+    1.5rem
+  );
+
+  text-align: center;
+
+  letter-spacing: 0.02em;
+}
+
+.prompt-wrapper input::placeholder {
+  color: rgba(255, 255, 255, 0.38);
+}
+
+.prompt-line {
+  width: 100%;
+  height: 1px;
+
+  background:
+    linear-gradient(
+      90deg,
+      transparent,
+      rgba(22, 140, 255, 0.8),
+      transparent
+    );
+
+  box-shadow:
+    0 0 14px rgba(22, 140, 255, 0.18);
+}
+
+
+/* Enter */
+
+.enter-button {
+  margin-top: 40px;
+
+  padding: 15px 34px;
+
+  border: 1px solid rgba(255, 255, 255, 0.15);
+
+  background:
+    linear-gradient(
+      135deg,
+      rgba(255, 255, 255, 0.06),
+      rgba(255, 255, 255, 0.015)
+    );
+
+  color: #ffffff;
+
+  font-family: inherit;
+
+  font-size: 0.95rem;
+
+  cursor: pointer;
+
+  transition:
+    0.3s ease;
+
+  backdrop-filter: blur(10px);
+}
+
+.enter-button span {
+  margin-left: 18px;
+
+  color: #168cff;
+}
+
+.enter-button:hover:not(:disabled) {
+  border-color:
+    rgba(22, 140, 255, 0.6);
+
+  background:
+    rgba(22, 140, 255, 0.08);
+
+  box-shadow:
+    0 10px 35px rgba(22, 140, 255, 0.12);
+
+  transform: translateY(-2px);
+}
+
+.enter-button:disabled {
+  opacity: 0.3;
+  cursor: not-allowed;
+}
+
+
+/* ==================================================
+   ANSWER PAGE
+================================================== */
+
+.answer-page {
+  position: relative;
+
+  width: 100vw;
+  min-height: 100vh;
+
+  overflow-x: hidden;
+
+  background:
+    radial-gradient(
+      ellipse at 18% 50%,
+      rgba(22, 140, 255, 0.10),
+      transparent 42%
+    ),
+    linear-gradient(
+      115deg,
+      #030405,
+      #090b0e 45%,
+      #000000
+    );
+
+  color: #ffffff;
+}
+
+
+/* DNA */
+
+.answer-dna {
+  position: fixed;
+
+  top: -15%;
+  left: -18%;
+
+  width: 62%;
+  height: 135%;
+
+  transform: rotate(18deg);
+
+  opacity: 0.22;
+
+  pointer-events: none;
+}
+
+
+/* Answer content */
+
+.answer-content {
+  position: relative;
+
+  z-index: 3;
+
+  width: min(900px, 82vw);
+
+  margin: 0 auto;
+
+  padding-top: 17vh;
+  padding-bottom: 12vh;
+}
+
+
+/* Current prompt */
+
+.current-prompt {
+  width: 78%;
+
+  margin: 0 auto 45px;
+
+  padding: 16px 22px;
+
+  border-bottom:
+    1px solid rgba(22, 140, 255, 0.35);
+
+  color: rgba(255, 255, 255, 0.68);
+
+  font-size: 0.95rem;
+
+  text-align: center;
+
+  letter-spacing: 0.03em;
+}
+
+
+/* Answer */
+
+.answer-card {
+  padding: 48px 55px;
+
+  background:
+    linear-gradient(
+      135deg,
+      rgba(255, 255, 255, 0.055),
+      rgba(255, 255, 255, 0.015)
+    );
+
+  border:
+    1px solid rgba(255, 255, 255, 0.09);
+
+  border-radius: 4px;
+
+  box-shadow:
+    0 25px 80px rgba(0, 0, 0, 0.35);
+
+  backdrop-filter: blur(16px);
+}
+
+
+/* Heading */
+
+.answer-heading {
+  margin-bottom: 30px;
+
+  font-size: clamp(
+    2.5rem,
+    5vw,
+    4.5rem
+  );
+
+  font-weight: 700;
+
+  letter-spacing: -0.05em;
+}
+
+.answer-heading::after {
+  content: "";
+
+  display: block;
+
+  width: 55px;
+  height: 3px;
+
+  margin-top: 15px;
+
+  background: #168cff;
+
+  box-shadow:
+    0 0 15px rgba(22, 140, 255, 0.5);
+}
+
+
+/* Answer text */
+
+.answer-text {
+  color: rgba(255, 255, 255, 0.72);
+
+  font-size: 1rem;
+
+  line-height: 1.9;
+
+  max-width: 760px;
+}
+
+.answer-text p {
+  margin-bottom: 24px;
+}
+
+
+/* Ask again */
+
+.ask-again-button {
+  display: block;
+
+  width: 78%;
+
+  margin: 45px auto 0;
+
+  padding: 17px;
+
+  border: 1px solid rgba(255, 255, 255, 0.12);
+
+  background:
+    linear-gradient(
+      90deg,
+      rgba(255, 255, 255, 0.04),
+      rgba(22, 140, 255, 0.06),
+      rgba(255, 255, 255, 0.04)
+    );
+
+  color: #ffffff;
+
+  font-family: inherit;
+
+  font-size: 0.95rem;
+
+  cursor: pointer;
+
+  transition: 0.3s ease;
+}
+
+.ask-again-button span {
+  margin-left: 15px;
+
+  color: #168cff;
+}
+
+.ask-again-button:hover {
+  border-color:
+    rgba(22, 140, 255, 0.55);
+
+  box-shadow:
+    0 10px 35px rgba(22, 140, 255, 0.1);
+
+  transform: translateY(-2px);
+}
+
+
+/* ==================================================
+   RESPONSIVE
+================================================== */
+
+@media (max-width: 700px) {
+
+  .app-header {
+    padding: 22px;
+  }
+
+  .query-dna,
+  .answer-dna {
+    left: -55%;
+    width: 120%;
+  }
+
+  .prompt-wrapper {
+    width: 85vw;
+  }
+
+  .answer-content {
+    width: 90vw;
+    padding-top: 14vh;
+  }
+
+  .current-prompt,
+  .ask-again-button {
+    width: 100%;
+  }
+
+  .answer-card {
+    padding: 30px 24px;
+  }
+}
