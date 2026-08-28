@@ -8,7 +8,7 @@ class FAISSStore:
 
     def __init__(self, dimension):
 
-        self.index = faiss.IndexFlatL2(dimension)
+        self.index = faiss.IndexFlatIP(dimension)
 
         self.metadata = []
 

@@ -33,7 +33,7 @@ if __name__ == "__main__":
 
     retriever = Retriever()
 
-    question = "History of Prions"
+    question = "How are prion diseases transmitted?"
 
     results = retriever.search(question)
 
