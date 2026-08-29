@@ -55,7 +55,7 @@ if __name__ == "__main__":
 
     retriever = Retriever()
 
-    question = "How are Prions transmitted?"
+    question = "What is CJD?"
 
     results = retriever.search(
         question,
