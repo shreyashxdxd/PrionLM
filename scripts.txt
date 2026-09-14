@@ -1,3 +1,4 @@
 .\.venv\Scripts\Activate.ps1
 python -m src.retrieval.retriever
 python -m src.rag         
+llama-server -hf ggml-org/SmolLM3-3B-GGUF:Q4_K_M

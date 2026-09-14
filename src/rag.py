@@ -53,7 +53,7 @@ if __name__ == "__main__":
 
     rag = RAG()
 
-    question = "who are you?"
+    question = "How are prion diseases transmitted?"
 
     answer = rag.answer(question)
 

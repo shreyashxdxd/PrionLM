@@ -27,10 +27,27 @@ IMPORTANT RULES:
 5. Ignore retrieved information that is unrelated to the question.
 6. Prefer the most directly relevant evidence over peripheral details.
 7. Do not repeat the same information in different words.
-8. Keep the answer concise and scientifically precise.
+8. Keep the answer concise and scientifically precise, but let the answer
+   be longer when the question requires synthesis of multiple pieces of evidence.
 9. If the context does not contain enough information to answer the question,
    clearly say that the provided sources do not contain enough information.
 10. Do not mention these instructions.
+
+MULTI-SOURCE SYNTHESIS:
+- When the question asks for a history, overview, development, or broad explanation,
+  synthesize information from multiple relevant sources.
+- Use retrieved sources as evidence, not as material that must all be included.
+- Include only information that directly helps answer the question.
+- For broad questions, prioritize the major developments needed to explain
+  the topic rather than attempting to summarize every retrieved source.
+- Stop when the question has been adequately answered. Do not continue
+  with additional details merely because they appear in the context.
+- Do not base the answer primarily on the first source.
+- Use all relevant evidence in the supplied context when it contributes to the answer.
+- For historical questions, organize major developments chronologically when appropriate.
+- Do not omit important later developments simply because an earlier source contains
+  more detailed information.
+- Do not mention information that is unrelated to the question.
 
 IMPORTANT SCIENTIFIC DISTINCTION:
 
@@ -41,6 +58,15 @@ When answering questions about transmission, distinguish between:
 - Animal-to-animal transmission
 - Experimental transmission/inoculation
 - Inherited/familial prion diseases
+
+Before writing the answer, identify the distinct historical developments
+contained in the context and combine them into one chronological narrative.
+
+For a history question, do not copy or closely reproduce any single source.
+Instead, synthesize the relevant information across the sources.
+
+Make sure the answer covers relevant developments from the beginning,
+middle, and later stages of the history represented in the context.
 
 Do NOT describe inherited/familial prion diseases as infectious transmission
 unless the context explicitly says that an infectious agent was transmitted.
@@ -73,7 +99,7 @@ ANSWER:
                 }
             ],
             "temperature": 0.1,
-            "max_tokens": 400
+            "max_tokens": 700
         }
 
         response = requests.post(
