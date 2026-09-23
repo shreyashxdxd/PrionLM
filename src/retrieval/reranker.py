@@ -1,15 +1,22 @@
+from pathlib import Path
 from sentence_transformers import CrossEncoder
 
 
 class Reranker:
 
-    def __init__(
-        self,
-        model_name="cross-encoder/ms-marco-MiniLM-L-6-v2"
-    ):
+    def __init__(self, model_name=None):
+
         print("Loading reranker model...")
 
-        self.model = CrossEncoder(model_name)
+        model_path = (
+            Path(__file__).resolve().parents[2]
+            / "models"
+            / "ms-marco-MiniLM-L-6-v2"
+        )
+
+        self.model = CrossEncoder(
+            str(model_path)
+        )
 
         print("Reranker loaded successfully!")
 

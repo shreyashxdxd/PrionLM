@@ -53,7 +53,7 @@ if __name__ == "__main__":
 
     rag = RAG()
 
-    question = "What is CJD? explain longer"
+    question = "Types of Prion Diseases"
 
     answer = rag.answer(question)
 
