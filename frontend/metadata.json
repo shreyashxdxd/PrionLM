@@ -1,0 +1,6 @@
+{
+  "name": "PrionLM - Prion Biology AI Assistant",
+  "description": "A specialized prion biology-oriented AI assistant trained on medical researches and scientific literature.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
