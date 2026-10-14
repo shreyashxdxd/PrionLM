@@ -1,4 +1,11 @@
 .\.venv\Scripts\Activate.ps1
 python -m src.retrieval.retriever
 python -m src.rag         
+
+#Terminal 1:
 llama-server -hf ggml-org/SmolLM3-3B-GGUF:Q4_K_M
+#Terminal 2:
+python -m uvicorn backend.api:app --host 127.0.0.1 --port 8000
+#Terminal 3:
+cd frontend
+npm run dev
