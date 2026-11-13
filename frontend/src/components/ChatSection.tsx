@@ -1,5 +1,16 @@
 import React, { useState, useRef, useEffect } from 'react';
-import { ArrowRight, CornerDownLeft, Loader2, AlertCircle, RefreshCw, FileText, Check, Copy } from 'lucide-react';
+import {
+  ArrowRight,
+  CornerDownLeft,
+  Loader2,
+  AlertCircle,
+  RefreshCw,
+  FileText,
+  Check,
+  Copy,
+  ChevronDown,
+  ChevronRight,
+} from 'lucide-react';
 import { askPrionLM, API_BASE_URL } from '../api/prionlm';
 import { ChatResponse, ChatSource } from '../types';
 
@@ -15,6 +26,8 @@ export const ChatSection: React.FC = () => {
   const [currentQnA, setCurrentQnA] = useState<QnAEntry | null>(null);
   const [isLoading, setIsLoading] = useState(false);
   const [copied, setCopied] = useState(false);
+  const [sourcesOpen, setSourcesOpen] = useState(false);
+  const [expandedSources, setExpandedSources] = useState<number[]>([]);
 
   const textareaRef = useRef<HTMLTextAreaElement>(null);
   const answerSectionRef = useRef<HTMLDivElement>(null);
@@ -38,6 +51,8 @@ export const ChatSection: React.FC = () => {
     if (e) e.preventDefault();
     const trimmed = question.trim();
     if (!trimmed || isLoading) return;
+    setSourcesOpen(false);
+    setExpandedSources([]);
 
     setIsLoading(true);
     setCurrentQnA({ question: trimmed });
@@ -78,6 +93,14 @@ export const ChatSection: React.FC = () => {
       textareaRef.current?.focus();
     }, 100);
   };
+
+  const toggleSource = (index: number) => {
+    setExpandedSources((previous) =>
+      previous.includes(index)
+        ? previous.filter((item) => item !== index)
+        : [...previous, index]
+  );
+};
 
   const handleCopy = (text: string) => {
     navigator.clipboard.writeText(text);
@@ -223,38 +246,87 @@ export const ChatSection: React.FC = () => {
                 {renderFormattedAnswer(currentQnA.answer)}
               </div>
 
-              {/* Retrieved Sources Underneath the Answer */}
-              {currentQnA.sources && currentQnA.sources.length > 0 && (
-                <div className="mt-8 pt-6 border-t border-slate-800/80 space-y-3">
-                  <div className="flex items-center gap-2 text-xs font-semibold uppercase tracking-wider text-slate-400">
-                    <FileText className="h-4 w-4 text-sky-400" />
-                    <span>Retrieved Sources ({currentQnA.sources.length})</span>
-                  </div>
+              
+{/* Collapsible Retrieved Sources */}
+{currentQnA.sources && currentQnA.sources.length > 0 && (
+  <div className="mt-8 border-t border-slate-800/80 pt-6">
+    <button
+      type="button"
+      onClick={() => setSourcesOpen((previous) => !previous)}
+      aria-expanded={sourcesOpen}
+      className="flex w-full items-center justify-between rounded-xl border border-slate-800/80 bg-slate-900/60 p-4 text-left transition hover:border-sky-500/40 hover:bg-slate-900/90"
+    >
+      <span className="flex items-center gap-2 text-sm font-semibold text-slate-200">
+        <FileText className="h-4 w-4 text-sky-400" />
+        Sources ({currentQnA.sources.length})
+      </span>
 
-                  <div className="space-y-3">
-                    {currentQnA.sources.map((src, index) => (
-                      <div
-                        key={index}
-                        className="rounded-xl border border-slate-800/80 bg-slate-900/60 p-4 text-xs text-slate-300 backdrop-blur-sm space-y-2"
-                      >
-                        <div className="flex items-center justify-between text-[11px] text-slate-500 font-mono">
-                          <span>Source #{index + 1}</span>
-                          {src.metadata && Object.keys(src.metadata).length > 0 && (
-                            <span className="truncate max-w-[280px]">
-                              {Object.entries(src.metadata)
-                                .map(([k, v]) => `${k}: ${String(v)}`)
-                                .join(' | ')}
-                            </span>
-                          )}
-                        </div>
-                        <p className="leading-relaxed text-slate-300 whitespace-pre-wrap">
-                          {src.text}
-                        </p>
-                      </div>
-                    ))}
-                  </div>
+      {sourcesOpen ? (
+        <ChevronDown className="h-4 w-4 text-slate-400" />
+      ) : (
+        <ChevronRight className="h-4 w-4 text-slate-400" />
+      )}
+    </button>
+
+    {sourcesOpen && (
+      <div className="mt-3 space-y-2">
+        {currentQnA.sources.map((src, index) => {
+          const isExpanded = expandedSources.includes(index);
+          const metadata = src.metadata ?? {};
+
+          const titleValue =
+            metadata.title ??
+            metadata.source ??
+            metadata.filename ??
+            metadata.file_name ??
+            metadata.document ??
+            metadata.name;
+
+          const title =
+            typeof titleValue === 'string' && titleValue.trim()
+              ? titleValue
+              : `Source ${index + 1}`;
+
+          return (
+            <div
+              key={index}
+              className="overflow-hidden rounded-xl border border-slate-800/80 bg-slate-900/50 backdrop-blur-sm"
+            >
+              <button
+                type="button"
+                onClick={() => toggleSource(index)}
+                aria-expanded={isExpanded}
+                className="flex w-full items-center justify-between gap-3 p-4 text-left transition hover:bg-slate-800/50"
+              >
+                <span className="flex min-w-0 items-center gap-3">
+                  <FileText className="h-4 w-4 shrink-0 text-sky-400" />
+                  <span className="truncate text-sm font-medium text-slate-200">
+                    {title}
+                  </span>
+                </span>
+
+                {isExpanded ? (
+                  <ChevronDown className="h-4 w-4 shrink-0 text-slate-400" />
+                ) : (
+                  <ChevronRight className="h-4 w-4 shrink-0 text-slate-400" />
+                )}
+              </button>
+
+              {isExpanded && (
+                <div className="border-t border-slate-800/80 px-4 py-4">
+                  <p className="whitespace-pre-wrap break-words text-sm leading-relaxed text-slate-300">
+                    {src.text}
+                  </p>
                 </div>
               )}
+            </div>
+          );
+        })}
+      </div>
+    )}
+  </div>
+)}
+
 
               {/* Ask Another Question button */}
               <div className="pt-6 flex justify-center">
